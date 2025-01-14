@@ -122,79 +122,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &351625765
-PrefabInstance:
+--- !u!1 &388666240
+GameObject:
   m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 388666241}
+  m_Layer: 0
+  m_Name: CarSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &388666241
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 388666240}
   serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 603463181}
-    m_Modifications:
-    - target: {fileID: 1685613288135647696, guid: a8c57b2b34b174338a2b7922c4f3c55c, type: 3}
-      propertyPath: joystick
-      value: 
-      objectReference: {fileID: 2064553332}
-    - target: {fileID: 1685613288135647700, guid: a8c57b2b34b174338a2b7922c4f3c55c, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1685613288135647700, guid: a8c57b2b34b174338a2b7922c4f3c55c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1685613288135647700, guid: a8c57b2b34b174338a2b7922c4f3c55c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 7.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1685613288135647700, guid: a8c57b2b34b174338a2b7922c4f3c55c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -11.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1685613288135647700, guid: a8c57b2b34b174338a2b7922c4f3c55c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1685613288135647700, guid: a8c57b2b34b174338a2b7922c4f3c55c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1685613288135647700, guid: a8c57b2b34b174338a2b7922c4f3c55c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1685613288135647700, guid: a8c57b2b34b174338a2b7922c4f3c55c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1685613288135647700, guid: a8c57b2b34b174338a2b7922c4f3c55c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1685613288135647700, guid: a8c57b2b34b174338a2b7922c4f3c55c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1685613288135647700, guid: a8c57b2b34b174338a2b7922c4f3c55c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1685613288135647701, guid: a8c57b2b34b174338a2b7922c4f3c55c, type: 3}
-      propertyPath: joystick
-      value: 
-      objectReference: {fileID: 2064553332}
-    - target: {fileID: 1685613288135647701, guid: a8c57b2b34b174338a2b7922c4f3c55c, type: 3}
-      propertyPath: driftMultiplier
-      value: 1.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1685613288135647703, guid: a8c57b2b34b174338a2b7922c4f3c55c, type: 3}
-      propertyPath: m_Name
-      value: Car
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a8c57b2b34b174338a2b7922c4f3c55c, type: 3}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1309792612}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &603463180
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,7 +182,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1132679039}
+  - {fileID: 1309792612}
   - {fileID: 780403994}
   - {fileID: 6360674061054820660}
   m_Father: {fileID: 0}
@@ -334,7 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 695d9559758d77e4b9e52b84e2436562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1132679039}
+  target: {fileID: 1309792612}
   offset: {x: 0, y: 10, z: -6}
   smoothSpeed: 0.1
 --- !u!1 &689452314
@@ -537,11 +495,65 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 780403993}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1132679039 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1685613288135647700, guid: a8c57b2b34b174338a2b7922c4f3c55c, type: 3}
-  m_PrefabInstance: {fileID: 351625765}
+--- !u!1 &1309792611
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1309792612}
+  - component: {fileID: 1309792613}
+  m_Layer: 0
+  m_Name: CarSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1309792612
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309792611}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 9.56, z: -11.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 388666241}
+  m_Father: {fileID: 603463181}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1309792613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309792611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66574e94ac4f3e5499fb499390d4107a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carPrefab: {fileID: 1685613288135647703, guid: a8c57b2b34b174338a2b7922c4f3c55c, type: 3}
+  childCarPrefabs:
+  - {fileID: 6036943006681877870, guid: b1bbc7deec8f4df44bb562b308b89851, type: 3}
+  - {fileID: 7694763722262773211, guid: 8d2b212c2cb92ae4dae771aab6fa2a1b, type: 3}
+  bodyMaterials:
+  - {fileID: 2100000, guid: c808cf76b4f26604595f97c8e7edc023, type: 2}
+  - {fileID: 2100000, guid: 666afcb4e4d92ae42b501365a71b421f, type: 2}
+  - {fileID: 2100000, guid: b9d7e6b566a21df449db58aaf925bf34, type: 2}
+  wheelMaterials:
+  - {fileID: 2100000, guid: 0dffa260f92a15048ba88f90cb809dcc, type: 2}
+  - {fileID: 2100000, guid: 1af5e20863392af45bdf3e68abd043ad, type: 2}
+  - {fileID: 2100000, guid: 18adc75eeeb75394c87c6cbf512cb333, type: 2}
+  carSpawnPoint: {fileID: 388666241}
+  joystick: {fileID: 2064553332}
 --- !u!1 &1441995960
 GameObject:
   m_ObjectHideFlags: 0

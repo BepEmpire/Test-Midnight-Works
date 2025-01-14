@@ -1,29 +1,34 @@
 using UnityEngine;
 using EasyJoystick;
 
-public class CarController : MonoBehaviour 
+public class CarController : MonoBehaviour
 {
     [Header("Joystick")]
     [SerializeField] private Joystick joystick;
-    
+
     [Header("Settings")]
     [SerializeField] private float moveSpeed = 50;
     [SerializeField] private float maxSpeed = 15;
     [SerializeField] private float acceleration = 0.98f;
     [SerializeField] private float steerAngle = 20;
     [SerializeField] private float interpolate = 0.1f;
-    
+
     [Header("Drift")] 
     [SerializeField] private int driftIncreaser = 1;
     [SerializeField] private float minVerticalDriftResponse = 0.1f;
     [SerializeField] private float minHorizontalDriftResponse = 0.2f;
-    
+
     private Vector3 _currentMoveForce;
     private Vector3 _targetPosition;
-    
+
     private int _currentDriftScore;
     
-    private void Update() 
+    public void InitializeController(Joystick assignedJoystick)
+    {
+        joystick = assignedJoystick;
+    }
+
+    private void Update()
     {
         UpdateMoveForce();
         Steer();
@@ -63,7 +68,7 @@ public class CarController : MonoBehaviour
     {
         _targetPosition = transform.position + _currentMoveForce * Time.fixedDeltaTime;
     }
-    
+
     private void UpdateDriftScore()
     {
         if (Mathf.Abs(joystick.Vertical()) > minVerticalDriftResponse && Mathf.Abs(joystick.Horizontal()) > minHorizontalDriftResponse)

@@ -5,7 +5,7 @@ public class WheelController : MonoBehaviour
 {
     [Header("Joystick")]
     [SerializeField] private Joystick joystick;
-    
+
     [Header("Wheels Transform")]
     [SerializeField] private Transform frontLeftTransform;
     [SerializeField] private Transform frontRightTransform;
@@ -17,16 +17,21 @@ public class WheelController : MonoBehaviour
     [SerializeField] private WheelCollider frontRightWheel;
     [SerializeField] private WheelCollider rearLeftWheel;
     [SerializeField] private WheelCollider rearRightWheel;
-    
+
     [Header("Settings")]
     [SerializeField] private float motorForce = 50;
     [SerializeField] private float maxSteerAngle = 30;
 
     private float _verticalInput;
     private float _horizontalInput;
-    
+
     private float _steeringAngle;
     private float _rotationAngle;
+    
+    public void InitializeController(Joystick assignedJoystick)
+    {
+        joystick = assignedJoystick;
+    }
 
     private void FixedUpdate()
     {
@@ -41,7 +46,7 @@ public class WheelController : MonoBehaviour
         if (Mathf.Abs(joystick.Vertical()) > 0.1f)
         {
             _rotationAngle += 1000 * joystick.Vertical() * Time.deltaTime;
-            
+
             frontLeftTransform.Rotate(_rotationAngle, 0.0f, 0.0f);
             frontRightTransform.Rotate(_rotationAngle, 0.0f, 0.0f);
             rearLeftTransform.Rotate(_rotationAngle, 0.0f, 0.0f);
