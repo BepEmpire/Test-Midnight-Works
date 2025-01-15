@@ -67,17 +67,17 @@ public class CarPreviewManager : MonoBehaviour
 
     public void SaveCustomization()
     {
-        PlayerPrefs.SetInt("SelectedCar", selectedCarIndex);
-        PlayerPrefs.SetInt("SelectedMainMaterial", selectedMainMaterialIndex);
-        PlayerPrefs.SetInt("SelectedWheelMaterial", selectedWheelMaterialIndex);
+        PlayerPrefs.SetInt(Keys.SELECTED_CAR, selectedCarIndex);
+        PlayerPrefs.SetInt(Keys.SELECTED_MAIN_MATERIAL, selectedMainMaterialIndex);
+        PlayerPrefs.SetInt(Keys.SELECTED_WHEEL_MATERIAL, selectedWheelMaterialIndex);
         PlayerPrefs.Save();
     }
     
     public void LoadCustomization()
     {
-        selectedCarIndex = PlayerPrefs.GetInt("SelectedCar", 0);
-        selectedMainMaterialIndex = PlayerPrefs.GetInt("SelectedMainMaterial", 0);
-        selectedWheelMaterialIndex = PlayerPrefs.GetInt("SelectedWheelMaterial", 0);
+        selectedCarIndex = PlayerPrefs.GetInt(Keys.SELECTED_CAR, 0);
+        selectedMainMaterialIndex = PlayerPrefs.GetInt(Keys.SELECTED_MAIN_MATERIAL, 0);
+        selectedWheelMaterialIndex = PlayerPrefs.GetInt(Keys.SELECTED_WHEEL_MATERIAL, 0);
     }
     
     public void LoadMainMenu()

@@ -3,9 +3,6 @@ using EasyJoystick;
 
 public class CarController : MonoBehaviour
 {
-    [Header("Joystick")]
-    [SerializeField] private Joystick joystick;
-
     [Header("Settings")]
     [SerializeField] private float moveSpeed = 50;
     [SerializeField] private float maxSpeed = 15;
@@ -17,11 +14,14 @@ public class CarController : MonoBehaviour
     [SerializeField] private int driftIncreaser = 1;
     [SerializeField] private float minVerticalDriftResponse = 0.1f;
     [SerializeField] private float minHorizontalDriftResponse = 0.2f;
+    [SerializeField] private int coinsPerDriftScore = 1;
 
     private Vector3 _currentMoveForce;
     private Vector3 _targetPosition;
 
+    private Joystick joystick;
     private int _currentDriftScore;
+    private int _lastRewardedDriftScore;
     
     public void InitializeController(Joystick assignedJoystick)
     {
@@ -75,6 +75,12 @@ public class CarController : MonoBehaviour
         {
             _currentDriftScore += driftIncreaser;
             Debug.Log($"Drift Score: {_currentDriftScore}");
+            
+            if (_currentDriftScore - _lastRewardedDriftScore >= coinsPerDriftScore)
+            {
+                _lastRewardedDriftScore = _currentDriftScore;
+                WalletManager.Instance?.AddCoins(1);
+            }
         }
     }
 }

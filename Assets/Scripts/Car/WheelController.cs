@@ -3,9 +3,6 @@ using EasyJoystick;
 
 public class WheelController : MonoBehaviour
 {
-    [Header("Joystick")]
-    [SerializeField] private Joystick joystick;
-
     [Header("Wheels Transform")]
     [SerializeField] private Transform frontLeftTransform;
     [SerializeField] private Transform frontRightTransform;
@@ -22,6 +19,8 @@ public class WheelController : MonoBehaviour
     [SerializeField] private float motorForce = 50;
     [SerializeField] private float maxSteerAngle = 30;
 
+    private Joystick joystick;
+    
     private float _verticalInput;
     private float _horizontalInput;
 
