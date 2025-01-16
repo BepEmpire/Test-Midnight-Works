@@ -23,6 +23,14 @@ public class GameOverPopup : MonoBehaviour
         
         WalletManager.Instance.AddCoins(_coinsEarned);
     }
+
+    public void DoubleReward()
+    {
+        scoreText.text = $"Score: {_finalScore * 2}";
+        coinsText.text = $"Coins: {_coinsEarned * 2}";
+        
+        WalletManager.Instance.AddCoins(_coinsEarned);
+    }
     
     public void ExitToMainMenu()
     {

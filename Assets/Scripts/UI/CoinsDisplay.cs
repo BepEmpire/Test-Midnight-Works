@@ -13,12 +13,12 @@ public class CoinsDisplay : MonoBehaviour
     private void Start()
     {
         SetText(WalletManager.Instance.TotalCoins);
-        WalletManager.Instance.OnWalletChanged.AddListener(SetText);
+        WalletManager.Instance.OnCoinsChanged.AddListener(SetText);
     }
 
     private void OnDestroy()
     {
-        WalletManager.Instance.OnWalletChanged.RemoveListener(SetText);
+        WalletManager.Instance.OnCoinsChanged.RemoveListener(SetText);
     }
 
     private void SetText(int coins)
