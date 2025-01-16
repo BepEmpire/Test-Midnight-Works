@@ -16,6 +16,8 @@ public class CarSpawner : MonoBehaviour
     [SerializeField] private CameraFollow cameraFollow;
 
     private GameObject _currentCar;
+    
+    public GameObject CurrentCar => _currentCar;
 
     private void Start()
     {
@@ -76,6 +78,18 @@ public class CarSpawner : MonoBehaviour
         if (wheelController != null)
         {
             wheelController.InitializeController(joystick);
+        }
+    }
+
+    public void DisableCurrentCarControl()
+    {
+        if (_currentCar != null)
+        {
+            CarController carController = _currentCar.GetComponent<CarController>();
+            if (carController != null)
+            {
+                carController.DisableControl();
+            }
         }
     }
 }

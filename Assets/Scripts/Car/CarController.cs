@@ -14,14 +14,14 @@ public class CarController : MonoBehaviour
     [SerializeField] private int driftIncreaser = 1;
     [SerializeField] private float minVerticalDriftResponse = 0.1f;
     [SerializeField] private float minHorizontalDriftResponse = 0.2f;
-    [SerializeField] private int coinsPerDriftScore = 1;
+    //[SerializeField] private int coinsPerDriftScore = 1;
 
     private Vector3 _currentMoveForce;
     private Vector3 _targetPosition;
 
     private Joystick joystick;
     private int _currentDriftScore;
-    private int _lastRewardedDriftScore;
+    private bool _isControlEnabled = true;
     
     public void InitializeController(Joystick assignedJoystick)
     {
@@ -30,16 +30,22 @@ public class CarController : MonoBehaviour
 
     private void Update()
     {
-        UpdateMoveForce();
-        Steer();
-        InterpolatePosition();
-        UpdateDriftScore();
+        if (_isControlEnabled)
+        {
+            UpdateMoveForce();
+            Steer();
+            InterpolatePosition();
+            UpdateDriftScore();
+        }
     }
 
     private void FixedUpdate()
     {
-        Accelerate();
-        UpdateTargetPosition();
+        if (_isControlEnabled)
+        {
+            Accelerate();
+            UpdateTargetPosition();
+        }
     }
 
     private void UpdateMoveForce()
@@ -75,12 +81,16 @@ public class CarController : MonoBehaviour
         {
             _currentDriftScore += driftIncreaser;
             Debug.Log($"Drift Score: {_currentDriftScore}");
-            
-            if (_currentDriftScore - _lastRewardedDriftScore >= coinsPerDriftScore)
-            {
-                _lastRewardedDriftScore = _currentDriftScore;
-                WalletManager.Instance?.AddCoins(1);
-            }
         }
+    }
+
+    public void DisableControl()
+    {
+        _isControlEnabled = false;
+    }
+    
+    public int GetDriftScore()
+    {
+        return _currentDriftScore;
     }
 }
