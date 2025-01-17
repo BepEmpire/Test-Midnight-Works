@@ -3,9 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
-    public void StartGame()
+    public void StartSoloGame()
     {
         SceneManager.LoadScene(Scenes.GameScene.ToString());
+    }
+    
+    public void StartMultiplayerGame()
+    {
+        SceneManager.LoadScene(Scenes.Lobby.ToString());
     }
 
     public void OpenGarage()

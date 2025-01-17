@@ -1,8 +1,13 @@
 using UnityEngine;
+using TMPro;
 using EasyJoystick;
+using Photon.Pun;
 
 public class CarController : MonoBehaviour
 {
+    [SerializeField] private GameObject nicknameHolder;
+    [SerializeField] private TextMeshPro nickNameText;
+    
     [Header("Settings")]
     [SerializeField] private float moveSpeed = 50;
     [SerializeField] private float maxSpeed = 15;
@@ -14,14 +19,25 @@ public class CarController : MonoBehaviour
     [SerializeField] private int driftIncreaser = 1;
     [SerializeField] private float minVerticalDriftResponse = 0.1f;
     [SerializeField] private float minHorizontalDriftResponse = 0.2f;
-    //[SerializeField] private int coinsPerDriftScore = 1;
 
     private Vector3 _currentMoveForce;
     private Vector3 _targetPosition;
 
     private Joystick joystick;
+    private PhotonView _photonView;
     private int _currentDriftScore;
     private bool _isControlEnabled = true;
+    
+    private void Awake()
+    {
+        _photonView = GetComponent<PhotonView>();
+    }
+    
+    public void ActivateNicknameText()
+    {
+        nicknameHolder.SetActive(true);
+        nickNameText.text = _photonView.Controller.NickName;
+    }
     
     public void InitializeController(Joystick assignedJoystick)
     {
@@ -30,7 +46,7 @@ public class CarController : MonoBehaviour
 
     private void Update()
     {
-        if (_isControlEnabled)
+        if (_isControlEnabled || _photonView.IsMine)
         {
             UpdateMoveForce();
             Steer();
@@ -41,7 +57,7 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_isControlEnabled)
+        if (_isControlEnabled || _photonView.IsMine)
         {
             Accelerate();
             UpdateTargetPosition();

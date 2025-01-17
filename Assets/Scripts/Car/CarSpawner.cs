@@ -1,5 +1,6 @@
 using UnityEngine;
 using EasyJoystick;
+using Photon.Pun;
 
 public class CarSpawner : MonoBehaviour
 {
@@ -9,12 +10,14 @@ public class CarSpawner : MonoBehaviour
     [SerializeField] private Material[] wheelMaterials;
 
     [Header("Spawn Point")]
-    [SerializeField] private Transform carSpawnPoint;
+    [SerializeField] private Transform[] carSpawnPoints;
 
     [Header("Joystick and Camera Connection")]
     [SerializeField] private Joystick joystick;
     [SerializeField] private CameraFollow cameraFollow;
 
+    [SerializeField] private bool isPhotonUsed;
+    
     private GameObject _currentCar;
     
     public GameObject CurrentCar => _currentCar;
@@ -30,8 +33,17 @@ public class CarSpawner : MonoBehaviour
         int bodyMaterialIndex = PlayerPrefs.GetInt(Keys.SELECTED_MAIN_MATERIAL, 0);
         int wheelMaterialIndex = PlayerPrefs.GetInt(Keys.SELECTED_WHEEL_MATERIAL, 0);
 
-        _currentCar = Instantiate(carPrefabs[selectedChildCarIndex], transform);
-        _currentCar.transform.localPosition = Vector3.zero;
+        if (isPhotonUsed)
+        {
+            _currentCar = PhotonNetwork.Instantiate(carPrefabs[selectedChildCarIndex].name, Vector3.zero, Quaternion.identity);
+            _currentCar.transform.SetParent(transform);
+            _currentCar.transform.position = GetRandomPosition();
+        }
+        else
+        {
+            _currentCar = Instantiate(carPrefabs[selectedChildCarIndex], Vector3.zero, Quaternion.identity);
+            _currentCar.transform.position = GetRandomPosition();
+        }
 
         ApplyBodyMaterial(_currentCar, bodyMaterialIndex);
         ApplyWheelMaterial(_currentCar, wheelMaterialIndex);
@@ -66,17 +78,25 @@ public class CarSpawner : MonoBehaviour
 
     private void InitializeCarControllers(GameObject car)
     {
+        Debug.Log("Initialize Car Controller");
         cameraFollow.SetTarget(_currentCar.transform);
         
         var carController = car.GetComponent<CarController>();
         if (carController != null)
         {
+            Debug.Log("Car Controller != null");
             carController.InitializeController(joystick);
+
+            if (isPhotonUsed)
+            {
+                carController.ActivateNicknameText();
+            }
         }
 
         var wheelController = car.GetComponent<WheelController>();
         if (wheelController != null)
         {
+            Debug.Log("Wheel Controller != null");
             wheelController.InitializeController(joystick);
         }
     }
@@ -91,5 +111,10 @@ public class CarSpawner : MonoBehaviour
                 carController.DisableControl();
             }
         }
+    }
+    
+    private Vector3 GetRandomPosition()
+    {
+        return carSpawnPoints[Random.Range(0, carSpawnPoints.Length)].position;
     }
 }

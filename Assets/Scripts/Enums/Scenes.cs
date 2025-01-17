@@ -2,5 +2,7 @@ public enum Scenes
 {
     MenuScene,
     GameScene,
-    GarageScene
+    GarageScene,
+    Lobby,
+    MultiplayerScene
 }
