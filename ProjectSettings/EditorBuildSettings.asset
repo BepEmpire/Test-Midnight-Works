@@ -9,15 +9,18 @@ EditorBuildSettings:
     path: Assets/Scenes/MenuScene.unity
     guid: ea3a1748c4bd6a44887b5de89f3e3973
   - enabled: 1
-    path: Assets/Scenes/GameScene/GameScene.unity
+    path: Assets/Scenes/GameScene/Level1.unity
     guid: 2dcaa08ed007f4dbd83ad945a5b3b78c
+  - enabled: 1
+    path: Assets/Scenes/GameScene/Level2.unity
+    guid: 548ded55d1c8e60479e94a90376a52f1
   - enabled: 1
     path: Assets/Scenes/GameScene/MultiplayerScene.unity
     guid: 69268da33a729af45aed93184940b372
   - enabled: 1
-    path: Assets/Scenes/GarageScene.unity
-    guid: ef922f918e14803489b2d531ca42aaa7
-  - enabled: 1
     path: Assets/Scenes/Lobby.unity
     guid: ae97d842256e24a289a7754631d94db3
+  - enabled: 1
+    path: Assets/Scenes/GarageScene.unity
+    guid: ef922f918e14803489b2d531ca42aaa7
   m_configObjects: {}

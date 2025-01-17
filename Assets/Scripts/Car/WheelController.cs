@@ -34,6 +34,8 @@ public class WheelController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (joystick == null) return;
+        
         if (Mathf.Abs(joystick.Vertical()) > 0.05f || Mathf.Abs(joystick.Horizontal()) > 0.05f)
         {
             Input();

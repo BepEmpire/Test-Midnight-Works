@@ -3,9 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
-    public void StartSoloGame()
+    public void StartLevel1()
     {
-        SceneManager.LoadScene(Scenes.GameScene.ToString());
+        SceneManager.LoadScene(Scenes.Level1.ToString());
+    }
+    
+    public void StartLevel2()
+    {
+        SceneManager.LoadScene(Scenes.Level2.ToString());
     }
     
     public void StartMultiplayerGame()

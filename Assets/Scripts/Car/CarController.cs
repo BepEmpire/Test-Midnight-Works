@@ -19,6 +19,10 @@ public class CarController : MonoBehaviour
     [SerializeField] private int driftIncreaser = 1;
     [SerializeField] private float minVerticalDriftResponse = 0.1f;
     [SerializeField] private float minHorizontalDriftResponse = 0.2f;
+    
+    [Header("Bounds")] 
+    [SerializeField] private Vector2 xBounds = new Vector2(-30f, 30f);
+    [SerializeField] private Vector2 zBounds = new Vector2(-20f, 20f);
 
     private Vector3 _currentMoveForce;
     private Vector3 _targetPosition;
@@ -26,13 +30,26 @@ public class CarController : MonoBehaviour
     private Joystick joystick;
     private PhotonView _photonView;
     private int _currentDriftScore;
-    private bool _isControlEnabled = true;
     
+    private bool _isControlEnabled = true;
+    private bool _isMultiplayer;
+    private bool _hasInitializedPosition = false;
+
     private void Awake()
     {
         _photonView = GetComponent<PhotonView>();
     }
-    
+
+    private void Start()
+    {
+        _isMultiplayer = PhotonNetwork.InRoom;
+        
+        _targetPosition = new Vector3(transform.position.x, 7.9f, transform.position.z);
+        transform.position = _targetPosition;
+
+        _hasInitializedPosition = true;
+    }
+
     public void ActivateNicknameText()
     {
         nicknameHolder.SetActive(true);
@@ -46,7 +63,7 @@ public class CarController : MonoBehaviour
 
     private void Update()
     {
-        if (_isControlEnabled || _photonView.IsMine)
+        if (_isControlEnabled && (!_isMultiplayer || (_isMultiplayer && _photonView.IsMine)))
         {
             UpdateMoveForce();
             Steer();
@@ -57,7 +74,7 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_isControlEnabled || _photonView.IsMine)
+        if (_isControlEnabled && (!_isMultiplayer || (_isMultiplayer && _photonView.IsMine)))
         {
             Accelerate();
             UpdateTargetPosition();
@@ -77,7 +94,10 @@ public class CarController : MonoBehaviour
 
     private void InterpolatePosition()
     {
-        transform.position = Vector3.Lerp(transform.position, _targetPosition, interpolate);
+        if (_hasInitializedPosition)
+        {
+            transform.position = Vector3.Lerp(transform.position, _targetPosition, interpolate);
+        }
     }
 
     private void Accelerate()
@@ -89,6 +109,9 @@ public class CarController : MonoBehaviour
     private void UpdateTargetPosition()
     {
         _targetPosition = transform.position + _currentMoveForce * Time.fixedDeltaTime;
+        
+        _targetPosition.x = Mathf.Clamp(_targetPosition.x, xBounds.x, xBounds.y);
+        _targetPosition.z = Mathf.Clamp(_targetPosition.z, zBounds.x, zBounds.y);
     }
 
     private void UpdateDriftScore()

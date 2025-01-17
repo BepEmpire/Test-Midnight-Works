@@ -185,6 +185,8 @@ MonoBehaviour:
   driftIncreaser: 2
   minVerticalDriftResponse: 0.2
   minHorizontalDriftResponse: 0.5
+  xBounds: {x: -35, y: 35}
+  zBounds: {x: -26, y: 26}
 --- !u!114 &1685613288135647696
 MonoBehaviour:
   m_ObjectHideFlags: 0

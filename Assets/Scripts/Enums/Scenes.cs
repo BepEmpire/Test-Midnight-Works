@@ -1,7 +1,8 @@
 public enum Scenes
 {
     MenuScene,
-    GameScene,
+    Level1,
+    Level2,
     GarageScene,
     Lobby,
     MultiplayerScene

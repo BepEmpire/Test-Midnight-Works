@@ -35,14 +35,11 @@ public class CarSpawner : MonoBehaviour
 
         if (isPhotonUsed)
         {
-            _currentCar = PhotonNetwork.Instantiate(carPrefabs[selectedChildCarIndex].name, Vector3.zero, Quaternion.identity);
-            _currentCar.transform.SetParent(transform);
-            _currentCar.transform.position = GetRandomPosition();
+            _currentCar = PhotonNetwork.Instantiate(carPrefabs[selectedChildCarIndex].name, GetRandomPosition(), Quaternion.identity);
         }
         else
         {
-            _currentCar = Instantiate(carPrefabs[selectedChildCarIndex], Vector3.zero, Quaternion.identity);
-            _currentCar.transform.position = GetRandomPosition();
+            _currentCar = Instantiate(carPrefabs[selectedChildCarIndex], GetRandomPosition(), Quaternion.identity);
         }
 
         ApplyBodyMaterial(_currentCar, bodyMaterialIndex);
