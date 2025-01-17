@@ -47,6 +47,7 @@ public class CarPreviewManager : MonoBehaviour
         }
 
         selectedMainMaterialIndex = materialIndex;
+        SaveCustomization();
     }
     
     public void ApplyWheelMaterial(int materialIndex)
@@ -63,6 +64,7 @@ public class CarPreviewManager : MonoBehaviour
         }
 
         selectedWheelMaterialIndex = materialIndex;
+        SaveCustomization();
     }
 
     public void SaveCustomization()
