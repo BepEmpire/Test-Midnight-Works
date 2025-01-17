@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using TMPro;
-using UnityEngine.Events;
 
 public class Timer : MonoBehaviour
 {
@@ -42,7 +41,7 @@ public class Timer : MonoBehaviour
         }
     }
 
-    public void StartTimer()
+    private void StartTimer()
     {
         _remainingTime = duration;
         _isRunning = true;

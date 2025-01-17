@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class LookAtCamera : MonoBehaviour
 {
-	private Camera targetCamera;
+	private Camera _targetCamera;
 	
 	private void Start()
 	{
-		targetCamera = Camera.main;
+		_targetCamera = Camera.main;
 	}
 
 	private void Update()
 	{
-		if (targetCamera != null)
+		if (_targetCamera != null)
 		{
-			Vector3 direction = targetCamera.transform.position - transform.position;
+			Vector3 direction = _targetCamera.transform.position - transform.position;
 			direction.y = 0;
 			
 			transform.rotation = Quaternion.LookRotation(-direction);

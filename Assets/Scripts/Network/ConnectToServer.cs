@@ -8,21 +8,21 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
 	
 	private void Start()
 	{
-		Debug.Log("Start Connection To Server");
+		Debug.Log("Start connection to server");
 		
 		PhotonNetwork.ConnectUsingSettings();
 	}
 
 	public override void OnConnectedToMaster()
 	{
-		Debug.Log("Connect To Server");
+		Debug.Log("Connect to server");
 		
 		PhotonNetwork.JoinLobby();
 	}
 
 	public override void OnJoinedLobby()
 	{
-		Debug.Log("Join Lobby Scene");
+		Debug.Log("Join lobby scene");
 		
 		InitUserName();
 		onJoinedLobby?.Invoke();

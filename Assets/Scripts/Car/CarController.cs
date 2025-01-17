@@ -5,6 +5,7 @@ using Photon.Pun;
 
 public class CarController : MonoBehaviour
 {
+    [Header("Nickname")]
     [SerializeField] private GameObject nicknameHolder;
     [SerializeField] private TextMeshPro nickNameText;
     
@@ -23,12 +24,14 @@ public class CarController : MonoBehaviour
     [Header("Bounds")] 
     [SerializeField] private Vector2 xBounds = new Vector2(-30f, 30f);
     [SerializeField] private Vector2 zBounds = new Vector2(-20f, 20f);
+    [SerializeField] private float yPosition = 7.9f;
 
+    private Joystick _joystick;
+    private PhotonView _photonView;
+    
     private Vector3 _currentMoveForce;
     private Vector3 _targetPosition;
 
-    private Joystick joystick;
-    private PhotonView _photonView;
     private int _currentDriftScore;
     
     private bool _isControlEnabled = true;
@@ -44,7 +47,7 @@ public class CarController : MonoBehaviour
     {
         _isMultiplayer = PhotonNetwork.InRoom;
         
-        _targetPosition = new Vector3(transform.position.x, 7.9f, transform.position.z);
+        _targetPosition = new Vector3(transform.position.x, yPosition, transform.position.z);
         transform.position = _targetPosition;
 
         _hasInitializedPosition = true;
@@ -58,7 +61,17 @@ public class CarController : MonoBehaviour
     
     public void InitializeController(Joystick assignedJoystick)
     {
-        joystick = assignedJoystick;
+        _joystick = assignedJoystick;
+    }
+    
+    public void DisableControl()
+    {
+        _isControlEnabled = false;
+    }
+    
+    public int GetDriftScore()
+    {
+        return _currentDriftScore;
     }
 
     private void Update()
@@ -83,12 +96,12 @@ public class CarController : MonoBehaviour
 
     private void UpdateMoveForce()
     {
-        _currentMoveForce += transform.forward * (moveSpeed * joystick.Vertical() * Time.fixedDeltaTime);
+        _currentMoveForce += transform.forward * (moveSpeed * _joystick.Vertical() * Time.fixedDeltaTime);
     }
 
     private void Steer()
     {
-        float steerInput = joystick.Horizontal();
+        float steerInput = _joystick.Horizontal();
         transform.Rotate(Vector3.up * (steerInput * _currentMoveForce.magnitude * steerAngle * Time.deltaTime));
     }
 
@@ -116,20 +129,10 @@ public class CarController : MonoBehaviour
 
     private void UpdateDriftScore()
     {
-        if (Mathf.Abs(joystick.Vertical()) > minVerticalDriftResponse && Mathf.Abs(joystick.Horizontal()) > minHorizontalDriftResponse)
+        if (Mathf.Abs(_joystick.Vertical()) > minVerticalDriftResponse && Mathf.Abs(_joystick.Horizontal()) > minHorizontalDriftResponse)
         {
             _currentDriftScore += driftIncreaser;
             Debug.Log($"Drift Score: {_currentDriftScore}");
         }
-    }
-
-    public void DisableControl()
-    {
-        _isControlEnabled = false;
-    }
-    
-    public int GetDriftScore()
-    {
-        return _currentDriftScore;
     }
 }

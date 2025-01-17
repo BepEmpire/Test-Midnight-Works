@@ -19,7 +19,7 @@ public class WheelController : MonoBehaviour
     [SerializeField] private float motorForce = 50;
     [SerializeField] private float maxSteerAngle = 30;
 
-    private Joystick joystick;
+    private Joystick _joystick;
     
     private float _verticalInput;
     private float _horizontalInput;
@@ -29,14 +29,14 @@ public class WheelController : MonoBehaviour
     
     public void InitializeController(Joystick assignedJoystick)
     {
-        joystick = assignedJoystick;
+        _joystick = assignedJoystick;
     }
 
     private void FixedUpdate()
     {
-        if (joystick == null) return;
+        if (_joystick == null) return;
         
-        if (Mathf.Abs(joystick.Vertical()) > 0.05f || Mathf.Abs(joystick.Horizontal()) > 0.05f)
+        if (Mathf.Abs(_joystick.Vertical()) > 0.05f || Mathf.Abs(_joystick.Horizontal()) > 0.05f)
         {
             Input();
             Steer();
@@ -44,9 +44,9 @@ public class WheelController : MonoBehaviour
             UpdateWheelPosition();
         }
 
-        if (Mathf.Abs(joystick.Vertical()) > 0.1f)
+        if (Mathf.Abs(_joystick.Vertical()) > 0.1f)
         {
-            _rotationAngle += 1000 * joystick.Vertical() * Time.deltaTime;
+            _rotationAngle += 1000 * _joystick.Vertical() * Time.deltaTime;
 
             frontLeftTransform.Rotate(_rotationAngle, 0.0f, 0.0f);
             frontRightTransform.Rotate(_rotationAngle, 0.0f, 0.0f);
@@ -57,8 +57,8 @@ public class WheelController : MonoBehaviour
 
     private void Input()
     {
-        _horizontalInput = joystick.Horizontal();
-        _verticalInput = joystick.Vertical();
+        _horizontalInput = _joystick.Horizontal();
+        _verticalInput = _joystick.Vertical();
     }
 
     private void Steer()

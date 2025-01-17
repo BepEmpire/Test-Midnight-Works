@@ -22,7 +22,6 @@ public class TestPlayerController : MonoBehaviour
 	{
 		nickNameText.text = _photonView.Controller.NickName;
 		
-		// TODO: Delete
 		initialX = transform.position.x;
 	}
 	

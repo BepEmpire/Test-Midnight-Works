@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 public class WalletManager : MonoBehaviour
 {
@@ -8,12 +7,13 @@ public class WalletManager : MonoBehaviour
 
     public UnityEvent<int> OnCoinsChanged;
     public UnityEvent<int> OnDollarsChanged;
-
-    private const string COINS_KEY = "TotalCoins";
-    private const string DOLLARS_KEY = "TotalDollars";
+    
     public int TotalCoins { get; private set; }
     public int TotalDollars { get; private set; }
 
+    private const string COINS_KEY = "TotalCoins";
+    private const string DOLLARS_KEY = "TotalDollars";
+    
     private void Awake()
     {
         if (Instance == null)

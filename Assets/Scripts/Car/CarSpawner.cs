@@ -16,15 +16,27 @@ public class CarSpawner : MonoBehaviour
     [SerializeField] private Joystick joystick;
     [SerializeField] private CameraFollow cameraFollow;
 
+    [Header("Photon Settings")]
     [SerializeField] private bool isPhotonUsed;
     
     private GameObject _currentCar;
-    
-    public GameObject CurrentCar => _currentCar;
 
     private void Start()
     {
         LoadSelectedCar();
+    }
+    
+    public void DisableCurrentCarControl()
+    {
+        if (_currentCar != null)
+        {
+            CarController carController = _currentCar.GetComponent<CarController>();
+            
+            if (carController != null)
+            {
+                carController.DisableControl();
+            }
+        }
     }
 
     private void LoadSelectedCar()
@@ -53,6 +65,7 @@ public class CarSpawner : MonoBehaviour
         if (materialIndex < 0 || materialIndex >= bodyMaterials.Length) return;
 
         Renderer carRenderer = car.GetComponentInChildren<Renderer>();
+        
         if (carRenderer != null)
         {
             carRenderer.material = bodyMaterials[materialIndex];
@@ -64,6 +77,7 @@ public class CarSpawner : MonoBehaviour
         if (materialIndex < 0 || materialIndex >= wheelMaterials.Length) return;
 
         Renderer[] wheelRenderers = car.GetComponentsInChildren<Renderer>();
+        
         foreach (Renderer renderer in wheelRenderers)
         {
             if (renderer.CompareTag("Wheel"))
@@ -75,13 +89,12 @@ public class CarSpawner : MonoBehaviour
 
     private void InitializeCarControllers(GameObject car)
     {
-        Debug.Log("Initialize Car Controller");
         cameraFollow.SetTarget(_currentCar.transform);
         
         var carController = car.GetComponent<CarController>();
+        
         if (carController != null)
         {
-            Debug.Log("Car Controller != null");
             carController.InitializeController(joystick);
 
             if (isPhotonUsed)
@@ -91,22 +104,10 @@ public class CarSpawner : MonoBehaviour
         }
 
         var wheelController = car.GetComponent<WheelController>();
+        
         if (wheelController != null)
         {
-            Debug.Log("Wheel Controller != null");
             wheelController.InitializeController(joystick);
-        }
-    }
-
-    public void DisableCurrentCarControl()
-    {
-        if (_currentCar != null)
-        {
-            CarController carController = _currentCar.GetComponent<CarController>();
-            if (carController != null)
-            {
-                carController.DisableControl();
-            }
         }
     }
     

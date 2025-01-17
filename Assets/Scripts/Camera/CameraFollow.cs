@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    private Transform _target;
-
-    [Header("Settings")] [SerializeField] private Vector3 offset;
+    [Header("Settings")] 
+    [SerializeField] private Vector3 offset;
     [SerializeField, Min(0)] private float smoothSpeed = 0.1f;
+    
+    private Transform _target;
 
     private void LateUpdate()
     {

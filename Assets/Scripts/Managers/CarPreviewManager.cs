@@ -1,21 +1,20 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class CarPreviewManager : MonoBehaviour
 {
-   [Header("Car Configuration")]
+    [Header("Car Configuration")]
     [SerializeField] private GameObject[] carPrefabs;
     [SerializeField] private Material[] mainMaterials;
     [SerializeField] private Material[] wheelMaterials;
 
     [Header("Preview Settings")]
     [SerializeField] private Transform carPreviewArea;
-    private GameObject _currentCar;
 
-    [Header("Player Data")]
-    public int selectedCarIndex = 0;
-    public int selectedMainMaterialIndex = 0;
-    public int selectedWheelMaterialIndex = 0;
+    private int _selectedCarIndex = 0;
+    private int _selectedMainMaterialIndex = 0;
+    private int _selectedWheelMaterialIndex = 0;
+    
+    private GameObject _currentCar;
 
     private void Start()
     {
@@ -23,30 +22,18 @@ public class CarPreviewManager : MonoBehaviour
         LoadCarPreview();
     }
     
-    public void LoadCarPreview()
-    {
-        if (_currentCar != null)
-        {
-            Destroy(_currentCar);
-        }
-        
-        _currentCar = Instantiate(carPrefabs[selectedCarIndex], carPreviewArea.position, carPreviewArea.rotation, carPreviewArea);
-        
-        ApplyMainMaterial(selectedMainMaterialIndex);
-        ApplyWheelMaterial(selectedWheelMaterialIndex);
-    }
-    
     public void ApplyMainMaterial(int materialIndex)
     {
         if (materialIndex < 0 || materialIndex >= mainMaterials.Length) return;
 
         Renderer carRenderer = _currentCar.GetComponentInChildren<Renderer>();
+        
         if (carRenderer != null)
         {
             carRenderer.material = mainMaterials[materialIndex];
         }
 
-        selectedMainMaterialIndex = materialIndex;
+        _selectedMainMaterialIndex = materialIndex;
         SaveCustomization();
     }
     
@@ -55,6 +42,7 @@ public class CarPreviewManager : MonoBehaviour
         if (materialIndex < 0 || materialIndex >= wheelMaterials.Length) return;
 
         Renderer[] wheelRenderers = _currentCar.GetComponentsInChildren<Renderer>();
+        
         foreach (Renderer wheelRenderer in wheelRenderers)
         {
             if (wheelRenderer.CompareTag("Wheel"))
@@ -63,27 +51,35 @@ public class CarPreviewManager : MonoBehaviour
             }
         }
 
-        selectedWheelMaterialIndex = materialIndex;
+        _selectedWheelMaterialIndex = materialIndex;
         SaveCustomization();
     }
 
     public void SaveCustomization()
     {
-        PlayerPrefs.SetInt(Keys.SELECTED_CAR, selectedCarIndex);
-        PlayerPrefs.SetInt(Keys.SELECTED_MAIN_MATERIAL, selectedMainMaterialIndex);
-        PlayerPrefs.SetInt(Keys.SELECTED_WHEEL_MATERIAL, selectedWheelMaterialIndex);
+        PlayerPrefs.SetInt(Keys.SELECTED_CAR, _selectedCarIndex);
+        PlayerPrefs.SetInt(Keys.SELECTED_MAIN_MATERIAL, _selectedMainMaterialIndex);
+        PlayerPrefs.SetInt(Keys.SELECTED_WHEEL_MATERIAL, _selectedWheelMaterialIndex);
         PlayerPrefs.Save();
     }
     
-    public void LoadCustomization()
+    private void LoadCustomization()
     {
-        selectedCarIndex = PlayerPrefs.GetInt(Keys.SELECTED_CAR, 0);
-        selectedMainMaterialIndex = PlayerPrefs.GetInt(Keys.SELECTED_MAIN_MATERIAL, 0);
-        selectedWheelMaterialIndex = PlayerPrefs.GetInt(Keys.SELECTED_WHEEL_MATERIAL, 0);
+        _selectedCarIndex = PlayerPrefs.GetInt(Keys.SELECTED_CAR, 0);
+        _selectedMainMaterialIndex = PlayerPrefs.GetInt(Keys.SELECTED_MAIN_MATERIAL, 0);
+        _selectedWheelMaterialIndex = PlayerPrefs.GetInt(Keys.SELECTED_WHEEL_MATERIAL, 0);
     }
     
-    public void LoadMainMenu()
+    private void LoadCarPreview()
     {
-        SceneManager.LoadScene(Scenes.MenuScene.ToString());
+        if (_currentCar != null)
+        {
+            Destroy(_currentCar);
+        }
+        
+        _currentCar = Instantiate(carPrefabs[_selectedCarIndex], carPreviewArea.position, carPreviewArea.rotation, carPreviewArea);
+        
+        ApplyMainMaterial(_selectedMainMaterialIndex);
+        ApplyWheelMaterial(_selectedWheelMaterialIndex);
     }
 }

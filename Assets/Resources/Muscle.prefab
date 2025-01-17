@@ -89,6 +89,7 @@ MonoBehaviour:
   minHorizontalDriftResponse: 0.5
   xBounds: {x: -33, y: 33}
   zBounds: {x: -24, y: 24}
+  yPosition: 7.9
 --- !u!114 &1685613288135647696
 MonoBehaviour:
   m_ObjectHideFlags: 0

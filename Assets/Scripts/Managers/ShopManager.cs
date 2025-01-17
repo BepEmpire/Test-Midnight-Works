@@ -65,7 +65,7 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    public void BuyOrSelectCar(int carId)
+    private void BuyOrSelectCar(int carId)
     {
         bool isPurchased = PlayerPrefs.GetInt(PURCHASED_CAR + carId, 0) == 1;
 

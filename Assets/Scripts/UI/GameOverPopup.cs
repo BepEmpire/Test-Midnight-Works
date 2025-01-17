@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GameOverPopup : MonoBehaviour
 {
-    [Header("UI References")] [SerializeField]
-    private TextMeshProUGUI scoreText;
-
+    [Header("UI References")] 
+    [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI coinsText;
 
+    [Header("Photon Settings")] 
     [SerializeField] private bool isPhotonUsed;
 
     private int _finalScore;
