@@ -1993,7 +1993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 1741385771}
-  duration: 10
+  duration: 120
   gameOverPopup: {fileID: 407219682}
   carSpawner: {fileID: 1309792613}
 --- !u!1 &1822881077
